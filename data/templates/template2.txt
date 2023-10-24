@@ -1,0 +1,25 @@
+User Profile Template 2
+
+User Profile: Morgan Lee
+Demographics:
+Name: Morgan Lee
+Age: 29
+Gender: Non-Binary
+Location: Seattle, Washington
+Occupation: Environmental Consultant
+Education: Master’s degree in Environmental Science from the University of Washington
+Marital Status: Engaged, no children
+Ethnicity: Asian-American
+Languages Spoken: English, Mandarin
+- Hobbies and Interests
+Photography: Morgan cherishes capturing the serene beauty of nature through their lens, often sharing their work online.
+Cooking: With a love for healthy eating, Morgan enjoys trying out new vegetarian recipes and hosting potlucks.
+Fitness: Being a fitness enthusiast, Morgan attends pilates classes and hikes in the nearby trails regularly.
+Travel: Morgan and their fiancé have a bucket list of eco-friendly destinations they are planning to visit.
+Gardening: With a small balcony garden, Morgan grows their own herbs and enjoys the calm it brings.
+Community Involvement: Morgan is actively involved in local environmental campaigns, advocating for sustainable living practices.
+- Personality Traits
+Morgan is recognized for their empathetic and open-minded nature, making them approachable both professionally and personally.
+They value continuous learning and often engage in discussions that broaden their understanding of global issues.
+Being meticulous and solution-driven, Morgan excels in addressing environmental challenges in their consultancy projects.
+They are passionate about making a positive impact in their community and promoting eco-conscious living.

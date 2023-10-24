@@ -1,0 +1,24 @@
+User Profile Template 3
+
+User Profile: Jamie Adams
+Demographics:
+Name: Jamie Adams
+Age: 27
+Gender: Female
+Location: Denver, Colorado
+Occupation: Graphic Designer
+Education: Associate’s degree in Graphic Design from Denver Design School
+Marital Status: Single, no children
+Ethnicity: African-American
+Languages Spoken: English
+- Hobbies and Interests
+Photography: Jamie enjoys urban photography, capturing the essence of city life.
+Cooking: She likes experimenting with Italian recipes, often hosting small gatherings.
+Fitness: Jamie stays active through dancing and weekly gym sessions.
+Travel: A fan of road trips, she explores different states with her friends.
+Gardening: Jamie has indoor plants which she finds calming to care for.
+Community Involvement: Volunteers at a local animal shelter on weekends.
+- Personality Traits
+Jamie is creative and has a keen eye for detail, aiding her in her design projects.
+She values friendships and enjoys spending quality time with her close-knit group.
+Organized and goal-oriented, Jamie is known for meeting deadlines efficiently.

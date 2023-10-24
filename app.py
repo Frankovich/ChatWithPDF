@@ -8,17 +8,18 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from htmlTemplates import css, bot_template, user_template
 import os
+from dotenv import load_dotenv
 
-os.environ["OPENAI_API_KEY"] = "Enter Your API Key Here"
+load_dotenv()
+os.environ["OPENAI_API_KEY"] = os.getenv('KEY')
 
 
-def get_pdf_text(pdf_docs):
+def get_text_from_files(text_files):
     text = ""
-    for pdf in pdf_docs:
-        pdf_reader = PdfReader(pdf)
-        for page in pdf_reader.pages:
-            text += page.extract_text()
+    for text_file in text_files:
+        text += text_file.read().decode('utf-8')
     return text
+
 
 
 def get_text_chunks(text):
@@ -43,6 +44,10 @@ def get_conversation_chain(vectorstore):
 
 
 def handle_userinput(user_question):
+    if st.session_state.conversation is None:
+        st.error('Please upload PDFs and click "Add Data" to initialize the conversation.')
+        return
+
     response = st.session_state.conversation({"question": user_question})
     st.session_state.chat_history = response["chat_history"]
 
@@ -73,13 +78,13 @@ def main():
 
     with st.sidebar:
         st.subheader("Your documents")
-        pdf_docs = st.file_uploader(
-            "Upload your PDFs here and click on 'Add Data'", accept_multiple_files=True
+        text_files = st.file_uploader(
+            "Upload your text files here and click on 'Add Data'", accept_multiple_files=True, type=['txt']
         )
         if st.button("Add Data"):
             with st.spinner("Adding Data..."):
-                # get pdf text
-                raw_text = get_pdf_text(pdf_docs)
+                # get text from files
+                raw_text = get_text_from_files(text_files)
 
                 # get the text chunks
                 text_chunks = get_text_chunks(raw_text)
