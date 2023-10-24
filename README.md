@@ -1,11 +1,12 @@
-# ChatWithPDF
-Chat with PDF 📚
+# User Profile Creator
+
+Using NLP to process emails and generate user profiles.
 
 # Installation 
 
-git clone https://github.com/ChatTeach/ChatWithPDF.git
+Clone Repository
 
-Paste your own API Key
+Paste your own OpenAI API Key
 
 pip install -r requirements.txt
 
