@@ -8,18 +8,17 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from htmlTemplates import css, bot_template, user_template
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
-os.environ["OPENAI_API_KEY"] = os.getenv('KEY')
+os.environ["OPENAI_API_KEY"] = ""
 
 
-def get_text_from_files(text_files):
+def get_pdf_text(pdf_docs):
     text = ""
-    for text_file in text_files:
-        text += text_file.read().decode('utf-8')
+    for pdf in pdf_docs:
+        pdf_reader = PdfReader(pdf)
+        for page in pdf_reader.pages:
+            text += page.extract_text()
     return text
-
 
 
 def get_text_chunks(text):
@@ -44,10 +43,6 @@ def get_conversation_chain(vectorstore):
 
 
 def handle_userinput(user_question):
-    if st.session_state.conversation is None:
-        st.error('Please upload PDFs and click "Add Data" to initialize the conversation.')
-        return
-
     response = st.session_state.conversation({"question": user_question})
     st.session_state.chat_history = response["chat_history"]
 
@@ -63,7 +58,7 @@ def handle_userinput(user_question):
             )
 
 def main():
-    st.set_page_config(page_title="Chat with PDF :books:", page_icon=":books:")
+    st.set_page_config(page_title="Email to Profile (Alpha) :apple:", page_icon=":books:")
     st.write(css, unsafe_allow_html=True)
 
     if "conversation" not in st.session_state:
@@ -71,20 +66,27 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = None
 
-    st.header("Chat with PDF :books:")
-    user_question = st.text_input("Ask a question about your documents:")
-    if user_question:
-        handle_userinput(user_question)
+    st.header("Email to Profile (Alpha) :apple:")
+
+    if st.button("Predict Profile"):
+        user_question = "Using the emails, create a profile for the person who is receiving the emails " \
+                        "(if there is not enough information to fill out a field, try to give a possible guess and" \
+                        " make sure to write \"Possible\" before it" \
+                        " and format it this way:\n"\
+                    "Name:\n Hobbies:\n Possible Gender:\n Connections:\n Education:\n"
+        #st.text_input("Ask a question about your documents:")
+        if user_question:
+            handle_userinput(user_question)
 
     with st.sidebar:
         st.subheader("Your documents")
-        text_files = st.file_uploader(
-            "Upload your text files here and click on 'Add Data'", accept_multiple_files=True, type=['txt']
+        pdf_docs = st.file_uploader(
+            "Upload your PDFs here and click on 'Add Data'", accept_multiple_files=True
         )
         if st.button("Add Data"):
             with st.spinner("Adding Data..."):
-                # get text from files
-                raw_text = get_text_from_files(text_files)
+                # get pdf text
+                raw_text = get_pdf_text(pdf_docs)
 
                 # get the text chunks
                 text_chunks = get_text_chunks(raw_text)
