@@ -48,10 +48,11 @@ def handle_userinput(user_question):
 
     for i, message in enumerate(st.session_state.chat_history):
         if i % 2 == 0:
-            st.write(
-                user_template.replace("{{MSG}}", message.content),
-                unsafe_allow_html=True,
-            )
+            st.write("Generating Profile:")
+            #st.write(
+            #    user_template.replace("{{MSG}}", message.content),
+            #    unsafe_allow_html=True,
+            #)
         else:
             st.write(
                 bot_template.replace("{{MSG}}", message.content), unsafe_allow_html=True
@@ -67,14 +68,14 @@ def main():
         st.session_state.chat_history = None
 
     st.header("Email to Profile (Alpha) :apple:")
-
     if st.button("Predict Profile"):
-        user_question = "Using the emails, create a profile for the person who is receiving the emails " \
-                        "(if there is not enough information to fill out a field, try to give a possible guess and" \
+        user_question = "Using the emails, create a profile for the person who is receiving the emails and keep the" \
+                        " format neat (add a new line after each category) and only output that. " \
+                        "If there is not enough information to fill out a field, try to give a possible guess and" \
                         " make sure to write \"Possible\" before it" \
                         " and format it this way:\n"\
-                    "Name:\n Hobbies:\n Possible Gender:\n Connections:\n Education:\n"
-        #st.text_input("Ask a question about your documents:")
+                        "Name:\n Hobbies:\n Possible Gender:\n Connections:\n Education:\n Possible Criminal Involement:"
+    #user_question = st.text_input("Ask a question about your documents:")
         if user_question:
             handle_userinput(user_question)
 
