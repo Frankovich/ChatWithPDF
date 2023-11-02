@@ -9,15 +9,13 @@ from langchain.chains import ConversationalRetrievalChain
 from htmlTemplates import css, bot_template, user_template
 import os
 
-os.environ["OPENAI_API_KEY"] = ""
+os.environ["OPENAI_API_KEY"] = "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"
 
 
-def get_pdf_text(pdf_docs):
+def get_txt_text(txt_docs):
     text = ""
-    for pdf in pdf_docs:
-        pdf_reader = PdfReader(pdf)
-        for page in pdf_reader.pages:
-            text += page.extract_text()
+    for txt in txt_docs:
+        text += txt.read().decode("utf-8")
     return text
 
 
@@ -27,11 +25,11 @@ def get_text_chunks(text):
     )
     chunks = text_splitter.split_text(text)
     return chunks
+
 def get_vectorstore(text_chunks):
     embeddings = OpenAIEmbeddings()
     vectorstore = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
     return vectorstore
-
 
 def get_conversation_chain(vectorstore):
     llm = ChatOpenAI()
@@ -74,20 +72,21 @@ def main():
                         "If there is not enough information to fill out a field, try to give a possible guess and" \
                         " make sure to write \"Possible\" before it" \
                         " and format it this way:\n"\
-                        "Name:\n Hobbies:\n Possible Gender:\n Connections:\n Education:\n Possible Criminal Involement:"
-    #user_question = st.text_input("Ask a question about your documents:")
+                        "Name:\n Hobbies:\n Possible Gender:\n Connections:\n Education:\n Possible Criminal Involement:\n" \
+                        "Where is Virginia Tech"
+        #user_question = st.text_input("Ask a question about your documents:")
         if user_question:
             handle_userinput(user_question)
 
     with st.sidebar:
         st.subheader("Your documents")
-        pdf_docs = st.file_uploader(
-            "Upload your PDFs here and click on 'Add Data'", accept_multiple_files=True
+        txt_docs = st.file_uploader(
+            "Upload your TXT files here and click on 'Add Data'", accept_multiple_files=True, type=["txt"]
         )
         if st.button("Add Data"):
             with st.spinner("Adding Data..."):
-                # get pdf text
-                raw_text = get_pdf_text(pdf_docs)
+                # get txt text
+                raw_text = get_txt_text(txt_docs)
 
                 # get the text chunks
                 text_chunks = get_text_chunks(raw_text)
