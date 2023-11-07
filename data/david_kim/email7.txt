@@ -1,0 +1,10 @@
+Email 7
+
+Subject: Coding Workshop for Youth
+From: YouthTech@email.com
+Dear David,
+  We're hosting a coding workshop for aspiring young developers in our community. Your expertise and passion for coding make you an ideal mentor for this event.
+Your guidance can inspire the next generation of tech enthusiasts. Would you be interested in leading a coding session during the workshop?
+Let's empower young minds together.
+Warm regards,
+The Youth Tech Team
